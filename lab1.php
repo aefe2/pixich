@@ -9,39 +9,49 @@
 </head>
 <body>
 <?php
-$X = array(1, 2, 3, 4, 5, 6, 11);
-$Y = array(3, 4, 6, 9, 1, 5, 12, 44);
+$X = array(1, 32, 321, 4, 54, 6, 11);
+$Y = array(3, 45, 67, 9, 61, 5, 12, 44);
 $Z = array();
 
 echo "<pre>";
+echo "Массив X<br>";
 print_r($X);
 echo "</pre>";
 
 echo "<pre>";
+echo "Массив Y<br>";
 print_r($Y);
 echo "</pre>";
 
-for ($i = 0; $i < count($X); $i++) {
-    $buf = (string) $X[$i];
+$arrMerged = array_merge($X, $Y);
+
+echo "<pre>";
+print_r($arrMerged);
+echo "</pre>";
+
+for ($i = 0; $i < count($arrMerged); $i++) {
+    $buf = (string)$arrMerged[$i];
     $sum = 0;
-    for ($j = 0; $j < strlen($buf); $j++){
-        $buf[$j] = (int) $buf[$j];
+    for ($j = 0; $j < strlen($buf); $j++) {
+        $buf[$j] = (int)$buf[$j];
         $sum += $buf[$j];
     }
-    $X[$i] = $sum;
-//    for($j = 0; $j < strlen($X[$i]); $j++){
-//
-//    }
-//    if ($X[$i] > 10) {
-//        strval($X[$i]);
-//    }
-//    if ($X[$i] % 2 !== 0) {
-//
-//    }
+    $arrMerged[$i] = $sum;
 }
+
+for ($i = 0; $i < count($arrMerged); $i++) {
+    if ($arrMerged[$i] % 2 != 0) {
+        $Z[] = $arrMerged[$i];
+    }
+}
+
 echo "<pre>";
-var_dump($X);
+print_r($arrMerged);
+echo "</pre>";
+
+echo "<pre>";
 print_r($Z);
+echo "</pre>";
 ?>
 </body>
 </html>
