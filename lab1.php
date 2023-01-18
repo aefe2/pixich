@@ -15,8 +15,8 @@
 //Все числа, с нечётной суммой цифр, переписать в массив Z.
 //Найти три наибольших простых числа в массиве Z.
 
-$X = array(1, 32, 321, 4, 54, 6, 11);
-$Y = array(3, 45, 67, 9, 61, 5, 12, 44);
+$X = array(12, 34, 321, 42, 54, 6, 11);
+$Y = array(3, 45, 67, 9, 63, 5, 12, 44);
 $Z = array();
 
 echo "<pre>";
@@ -30,11 +30,6 @@ print_r($Y);
 echo "</pre>";
 
 $arrMerged = array_merge($X, $Y);
-
-echo "<pre>";
-echo "Смешанный массив<br>";
-print_r($arrMerged);
-echo "</pre>";
 
 for ($i = 0; $i < count($arrMerged); $i++) {
     $buf = (string)$arrMerged[$i];
@@ -52,21 +47,29 @@ for ($i = 0; $i < count($arrMerged); $i++) {
     }
 }
 
-for ($i = 0; $i < count($Z); $i++) {
-    $isSimple = 0;
-    if ($Z[$i] % 1 == 0 && $Z[$i] % $Z[$i]) {
-
-    }
-}
-
-echo "<pre>";
-print_r($arrMerged);
-echo "</pre>";
-
 echo "<pre>";
 echo "Массив Z<br>";
 print_r($Z);
 echo "</pre>";
+
+$simpleArr = [];
+foreach ($Z as $item) {
+    if (gmp_prob_prime($item, 10) == 2) {
+        $simpleArr[] = $item;
+    }
+}
+
+function arrSortDesc($a, $b)
+{
+    if ($a == $b) {
+        return 0;
+    }
+    return ($a < $b) ? 1 : -1;
+}
+
+uasort($simpleArr, 'arrSortDesc');
+echo "Три наибольших простых числа массива Z : $simpleArr[0]; $simpleArr[1]; $simpleArr[2]"
+
 ?>
 </body>
 </html>
